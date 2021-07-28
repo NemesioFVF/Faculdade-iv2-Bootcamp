@@ -1,0 +1,78 @@
+
+<!-- aqui [formGroup]="novoRestaurante e uma "função" que ira criar um modal para um novo reustaurante, guardando essas informações no cad posteriormente -->
+
+<form [formGroup]="novoRestaurante">
+    <div id="form">
+        <div id="inputs">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Qual o nome do restaurante?</mat-label>
+                <input matInput formControlName="nome">
+                <mat-icon matSuffix>restaurant</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Escolha um estado</mat-label>
+
+                <!-- nessa parte  '(selectionChange)="buscaCidade(novoRestaurante.value.estado)' você chama a função criada no seu component.ts -->
+                <mat-select formControlName="estado" (selectionChange)="buscaCidade(novoRestaurante.value.estado)">
+                    <mat-option [value]="estado" *ngFor="let estado of data">{{estado.nome}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" *ngIf="novoRestaurante.value.estado">
+                <mat-label>Escolha uma cidade</mat-label>
+                <mat-select formControlName="cidade">
+
+                    <!-- Ngfor é uma diretiva Angular que permite percorrer um array, ou qualquer objeto iterável, e exibir cada item do array como elemento na tela; aqui ele esta percorendo as cidades 
+
+                    A sintaxe of users significa que iremos iterar, ou percorrer, o array de usuários;
+                    E depois let user cria uma variável local que disponibiliza o valor de cada usuário.
+                    -->
+
+                    <mat-option [value]="cidade" *ngFor="let cidade of cidades">
+                        {{cidade}}
+                    </mat-option>   
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Descreva o restaurante, fale sobre preços, atendimento e o que mais quiser</mat-label>
+                <textarea #message maxlength="512" matInput formControlName="descricao" rows="8"></textarea>
+                <mat-icon matSuffix>description</mat-icon>
+                <mat-hint>{{message.value.length}} / 512</mat-hint>
+            </mat-form-field>
+
+        </div>
+
+        <div id="imagem-upload">
+
+            <div>
+                <button type="button" id="anx" mat-flat-button (click)="fileInput.click()">Anexar Imagem</button>
+                <input hidden (change)="onFileSelect($event)" #fileInput type="file" id="File">
+            </div>
+
+            <div id="imagem-content" (click)="fileInput.click()">
+
+                <!-- ngIf="" é diretiva estrutural; é necessário usar o * quando usado em template uma marcação que indica que ngIf="" ira resultar na alteração da estrutura html. -->
+
+                <mat-icon *ngIf="!selectedFile">photo_camera</mat-icon>
+                <img *ngIf="selectedFile" [src]="selectedFile" width="300">
+            </div>
+
+            <div id="rating">
+                <button mat-icon-button class="ic" *ngFor="let ratingId of ratingArr; index as i" (click)="onClick(i+1)">
+                    <!-- essa escrita dentro da tag {{showIcon}} se chama syntax sugar serve para falicitar o desenvolvimento; aqui basicamente ele esta repetindo o icone das estrelas -->
+                    <mat-icon>{{showIcon(i)}}</mat-icon>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="acoes">
+        <div>
+            <button mat-flat-button (click)="salvarRestaurante()">Salvar</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,55 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$findfood-primary: mat.define-palette(mat.$indigo-palette);
+$findfood-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$findfood-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$findfood-theme: mat.define-light-theme((
+  color: (
+    primary: $findfood-primary,
+    accent: $findfood-accent,
+    warn: $findfood-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($findfood-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-image: url(https://a-static.mlcdn.com.br/618x463/papel-de-parede-adesivo-gourmet-menu-restaurantes-cardapio-gf-casa-decor/gfcasadecor/gfc-gourmet-27/f02b063800ef0c5858ff601456b9b236.jpg);
+}
+
+mat-card { margin: auto; width: 90%; background-color: rgba(88, 19, 19, 0.945) !important; top: 10%; color: white !important;}
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {background-color: black;}
+
+.mat-card-subtitle {color: cornsilk;}
+
+.mat-dialog-container {background-color: rgba(209, 209, 209, 0.952);color: rgb(0, 0, 0);}
+
+.mat-form-field-flex {color: rgb(12, 12, 12);}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+// esse SCSS comando toda a bagaça!
