@@ -4,32 +4,42 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// importes do Angular Material, sempre que for usar um elemento do Material 
-// devemos colocar os imports e referencia-lo no NgModule para usar as como um tag.
+// Firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from "@angular/fire/storage";
 
-import { MatCardModule } from '@angular/material/card';
-import { RestaurantesComponent } from './restaurantes/restaurantes.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FiltroRestaurantePipe } from './shared/filtro-restaurante.pipe';
-import { RestauranteComponent } from './restaurante/restaurante.component';
-import { NovoRestauranteComponent } from './novo-restaurante/novo-restaurante.component';
+// Requisições HttpClient
 import { HttpClientModule } from '@angular/common/http';
+
+// material
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+// Componentes
+import { FilmesComponent } from './filmes/filmes.component';
+import { NovoFilme } from './novo-filme/novo-filme.component';
+import { FilmeComponent } from './filme/filme.component';
+import { environment } from 'src/environments/environment.prod';
+import { FiltroFilmePipe } from './shared/filtro-filmes.pipe';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RestaurantesComponent,
-    FiltroRestaurantePipe,
-    RestauranteComponent,
-    NovoRestauranteComponent
+    FilmesComponent,
+    NovoFilme,
+    FilmeComponent,
+    FiltroFilmePipe,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,11 +47,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AppRoutingModule,
     BrowserAnimationsModule,
 
+    // Firebase
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+
     //Forms
     ReactiveFormsModule,
     FormsModule,
 
-    // Angular Material
+    // material
     MatCardModule,
     MatButtonModule,
     MatIconModule,

@@ -1,0 +1,18 @@
+{
+  "targets": {
+    "findfood-faculdadeiv2-2021": {
+      "hosting": {
+        "findfood": [
+          "findfood-faculdadeiv2-2021"
+        ]
+      }
+    },
+    "findfood-nemesio": {
+      "hosting": {
+        "findfood": [
+          "findfood-nemesio"
+        ]
+      }
+    }
+  }
+}

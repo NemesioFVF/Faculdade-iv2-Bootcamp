@@ -1,0 +1,75 @@
+<section id="detalhes">
+  
+      <section id="filme">
+
+        <h1>{{ filme.nome }} ({{ filme.genero }})</h1>
+
+        <div id="rating">
+          <button mat-icon-button class="ic" *ngFor="let ratingId of ratingArr;index as i">
+            <mat-icon>{{ showIcon(rating, i) }}</mat-icon>
+          </button>
+        </div>
+
+        <div id="descricao-autor">
+          <h3>"{{ filme.descricao }}"</h3>
+        </div>
+     
+          <img [src]="filme.downloadUrl" style="border-radius: 10px;" width="300" id="filme-img">
+
+          <div id="autor">
+            <img mat-card-avatar [src]="filme.autorPost.photoURL" width="60">
+            <p>Postado por {{ filme.autorPost.displayName }}</p>
+          </div>
+
+    </section>
+
+    <div id="divisor"></div>
+
+      <section id="comentarios">
+        <h1>Avaliações de quem assistiu o Filme / Série: </h1>
+
+        <div id="avaliacoes">
+          <mat-card *ngFor="let comentario of comentarios_usuarios">
+            <div id="usuario">
+              <div>
+                <img mat-card-avatar [src]="comentario.autorPost.foto" width="30">
+                <span>{{ comentario.autorPost.nome }} - <i>{{ formataData(comentario.comentadoEm.seconds) }}</i></span>
+              </div>
+              <mat-icon id="excluir-comentario" (click)="excluirComentario(comentario)" *ngIf="usuarioLogado && comentario && usuarioLogado.uid === comentario.autorPost.uid">
+                delete
+              </mat-icon>
+            </div>
+            <p>"{{ comentario.comentario }}"</p>
+          
+            <div id="star-rating">
+              <button mat-icon-button class="ic" *ngFor="let ratingId of comentarios_usuarios_ratingArr;index as i">
+                <mat-icon> {{ showIcon(comentario.estrelas, i) }} </mat-icon>
+              </button>
+            </div>
+
+          </mat-card>
+        </div>
+
+            <div id="avaliacao-usuario">
+              <mat-form-field appearance="outline">
+                <mat-label>Dê sua opinião sobre esse Filme / Séries</mat-label>
+                <textarea #comentario maxlength="256" style="max-height: 20ch;" matInput [(ngModel)]="comentario_usuario" rows="4"></textarea>
+                <mat-icon matSuffix>description</mat-icon>
+                <mat-hint>{{ comentario.value.length }} / 256</mat-hint>
+              </mat-form-field>
+
+              <div id="save">
+                <div id="star-rating">
+                  <button mat-icon-button class="ic" *ngFor="let ratingId of usuario_ratingArr; index as i" (click)="onClick(i+1)">
+                    <mat-icon> {{ showIcon(usuario_rating, i) }}</mat-icon>
+                  </button>
+                </div>
+                <button mat-flat-button id="toSave" (click)="enviarComentario()">
+                  Enviar comentário
+                </button>
+              </div>
+            </div>
+
+      </section>
+      
+</section>

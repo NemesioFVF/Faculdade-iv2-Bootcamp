@@ -1,0 +1,43 @@
+<section>
+    <header>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon matSuffix>turned_in</mat-icon>
+          Opções</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="novoFilme()">
+                <mat-icon>add</mat-icon>
+                Cadastrar Filme ou Séries
+            </button>
+            <button mat-menu-item (click)="sair()">
+                <mat-icon>logout</mat-icon>
+                Sair
+            </button>
+        </mat-menu>
+    </header>
+
+    <div id="filmes">
+        <h1 style="color: rgb(0, 0, 0); text-shadow: rgba(255, 255, 255, 0.658) 0.1em 0.1em 0.2em">Filmes e Séries Indicados Durante os B@T's</h1>
+        <mat-form-field style="background: rgba(221, 221, 221, 0.096) !important;" appearance="outline">
+          <mat-label >Busque por uma título de Filme ou  Séries</mat-label>
+          <input matInput [(ngModel)]="toSearch" [ngModelOptions]="{standalone: true}">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    
+        <section id="filmes-cards">
+          <mat-card *ngFor="let filme of filmes | filtroFilme: toSearch">
+  
+            <mat-card-title style="color: gold;">{{ filme.nome }} <h3 style="color: azure;">{{ filme.genero }}</h3></mat-card-title>
+
+            <img mat-card-image [src]="filme.downloadUrl" style="cursor: pointer;" title="Clique para deixar uma Avaliação" id="filme-img" (click)="abrirFilme(filme)">
+       
+            <div id="toBottom">
+              <div>
+                <p style="font-size: 10px; text-align: left; font-weight: 600;">
+                  Criado por: {{filme.autorPost.displayName}} em {{ filme.criadoEm.seconds*1000 | date: "d/M/y"}}
+                </p>
+              </div>
+            </div>
+          </mat-card>
+        </section>
+    </div>
+</section>

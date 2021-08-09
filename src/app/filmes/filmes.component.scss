@@ -7,15 +7,29 @@ section {
   
     header { padding: 16px;background: #000000d3;box-shadow: 1px 1px 4px #333;color: #fff; }
   
-    #restaurantes { width: 90%; margin: auto; margin-top: 16px;
+    #filmes { width: 90%; margin: auto; margin-top: 16px;
   
-      h1 { font-weight: 600; }
+      h1 { 
+        font-weight: 600; 
+        color: #fff;
+      }
+
+      img {
+        opacity : 0.4;
+        transform: scale(0.9);
+      }
+      img:hover{
+        transform: scale(1);
+        transition: transform .5s ease;
+        opacity : 1;
+        
+      }
   
       mat-form-field { width: 60%; }
   
-      #restaurantes-cards { display: flex; flex-wrap: wrap; justify-content: flex-start;
+      #filmes-cards { display: flex; flex-wrap: wrap; justify-content: flex-start;
   
-        mat-card { background: #ffd1d1; margin: 0px 12px 16px 0px; width: 30%;
+        mat-card {margin: 0px 12px 16px 0px; width: 30%;max-width: 200px;
   
           mat-card-subtitle{ height: 100px; align-items: center; justify-content: center; align-items: center; margin-top: 25px;}
   
@@ -28,3 +42,11 @@ section {
       }
     }
   }
+.mat-dialog-container {
+  padding: 0px !important;
+}
+
+span {
+  border: 0px !important;
+}
+
